@@ -47,5 +47,4 @@ const deleteHouse = async (req, res) => {
     }
 };
 
-
 module.exports = { getAllHouses, getHouse, createHouse, updateHouse, deleteHouse };

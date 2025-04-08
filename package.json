@@ -13,14 +13,24 @@
   ],
   "author": "Júlia",
   "license": "MIT",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "fast-csv": "^5.0.2",
+    "pdfkit": "^0.16.0",
     "pg": "^8.14.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juguarnieri/hogwarts-BackEnd-BD.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juguarnieri/hogwarts-BackEnd-BD/issues"
+  },
+  "homepage": "https://github.com/juguarnieri/hogwarts-BackEnd-BD#readme",
+  "description": ""
 }
