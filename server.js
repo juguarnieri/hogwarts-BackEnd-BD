@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", wizardRoutes); 
-app.use("/api/houses", houseRoutes); 
+app.use("/api", houseRoutes); 
 app.use("/api/reports", reportRoutes);
 
 setupSwagger(app); // Configuração do Swagger
