@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const wizardController = require("../controllers/wizardController.js");
-const upload = require("../config/upload.js"); // crie a pasta middleware e o arquivo upload.js
+const upload = require("../config/upload.js");
 const apiKeyMiddleware = require("../config/apiKey.js");
-router.use(apiKeyMiddleware); // 🔒 Aplica para todas as rotas abaixo
 
-// Defina as rotas para os wizards
+router.use(apiKeyMiddleware); // 🔒 Aplica para todas as rotas abaixo
 
 /**
  * @swagger
@@ -18,19 +17,22 @@ router.use(apiKeyMiddleware); // 🔒 Aplica para todas as rotas abaixo
  * @swagger
  * /api/wizards:
  *   get:
- *     summary: Lista todos os bruxos
+ *     summary: Lista todos os bruxos (com filtro opcional por nome)
  *     tags: [Wizards]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: query
  *         name: name
  *         schema:
  *           type: string
- *         description: Filtro por nome
+ *         description: Nome do bruxo para filtrar
  *     responses:
  *       200:
  *         description: Lista de bruxos
  */
 router.get("/wizards", wizardController.getAllWizards);
+
 
 /**
  * @swagger
@@ -38,6 +40,8 @@ router.get("/wizards", wizardController.getAllWizards);
  *   get:
  *     summary: Busca bruxo por ID
  *     tags: [Wizards]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -58,6 +62,8 @@ router.get("/wizards/:id", wizardController.getWizard);
  *   post:
  *     summary: Cria um novo bruxo
  *     tags: [Wizards]
+ *     security:
+ *       - ApiKeyAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -84,6 +90,8 @@ router.post("/wizards", upload.single("photo"), wizardController.createWizard);
  *   put:
  *     summary: Atualiza um bruxo
  *     tags: [Wizards]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -106,12 +114,15 @@ router.post("/wizards", upload.single("photo"), wizardController.createWizard);
  *         description: Bruxo atualizado
  */
 router.put("/wizards/:id", wizardController.updateWizard);
+
 /**
  * @swagger
  * /api/wizards/{id}:
  *   delete:
  *     summary: Deleta um bruxo
  *     tags: [Wizards]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -123,6 +134,5 @@ router.put("/wizards/:id", wizardController.updateWizard);
  *         description: Bruxo deletado
  */
 router.delete("/wizards/:id", wizardController.deleteWizard);
- // 🔐
 
 module.exports = router;

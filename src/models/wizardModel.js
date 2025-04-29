@@ -1,11 +1,19 @@
 const pool = require("../config/database");
 
-const getWizards = async () => {
-    const result = await pool.query(
-        `SELECT wizards.*, houses.name AS house_name 
-         FROM wizards 
-         LEFT JOIN houses ON wizards.house_id = houses.id`
-    );
+const getWizards = async (name) => {
+    let query = `
+        SELECT wizards.*, houses.name AS house_name 
+        FROM wizards 
+        LEFT JOIN houses ON wizards.house_id = houses.id
+    `;
+    const params = [];
+
+    if (name) {
+        query += " WHERE wizards.name ILIKE $1"; 
+        params.push(`%${name}%`);
+    }
+
+    const result = await pool.query(query, params);
     return result.rows;
 };
 
@@ -47,4 +55,4 @@ const deleteWizard = async (id) => {
     return { message: "Bruxo deletado com sucesso." };
 };
 
-module.exports = { getWizards, getWizardById, createWizard, updateWizard, deleteWizard };
+module.exports = { getWizards, getWizardById, createWizard, updateWizard, deleteWizard};

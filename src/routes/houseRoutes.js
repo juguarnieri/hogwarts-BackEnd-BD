@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const houseController = require("../controllers/houseController");
-const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+const apiKeyMiddleware = require("../config/apiKey");
 
-router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+router.use(apiKeyMiddleware); 
 
 /**
  * @swagger
@@ -18,11 +18,12 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  *   get:
  *     summary: Lista todas as casas
  *     tags: [Houses]
+ *     security:
+ *       - ApiKeyAuth: []
  *     responses:
  *       200:
  *         description: Lista de casas
  */
-
 router.get("/houses", houseController.getAllHouses);
 
 /**
@@ -31,6 +32,8 @@ router.get("/houses", houseController.getAllHouses);
  *   get:
  *     summary: Busca casa por ID
  *     tags: [Houses]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -51,6 +54,8 @@ router.get("/houses/:id", houseController.getHouse);
  *   post:
  *     summary: Cria uma nova casa
  *     tags: [Houses]
+ *     security:
+ *       - ApiKeyAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -68,13 +73,14 @@ router.get("/houses/:id", houseController.getHouse);
  */
 router.post("/houses", houseController.createHouse);
 
-
 /**
  * @swagger
  * /api/houses/{id}:
  *   put:
  *     summary: Atualiza uma casa
  *     tags: [Houses]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -104,6 +110,8 @@ router.put("/houses/:id", houseController.updateHouse);
  *   delete:
  *     summary: Deleta uma casa
  *     tags: [Houses]
+ *     security:
+ *       - ApiKeyAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,8 +122,6 @@ router.put("/houses/:id", houseController.updateHouse);
  *       200:
  *         description: Casa deletada
  */
-
-
 router.delete("/houses/:id", houseController.deleteHouse);
 
 module.exports = router;
