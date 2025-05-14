@@ -4,7 +4,6 @@ const PDFDocument = require("pdfkit");
 const wizardModel = require("../models/wizardModel");
 const houseModel = require("../models/houseModel");
 
-// Exportar Bruxos em CSV
 const exportWizardCSV = async (req, res) => {
     try {
         const wizards = await wizardModel.getWizards();

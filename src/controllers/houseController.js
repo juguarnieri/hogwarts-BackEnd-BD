@@ -2,9 +2,11 @@ const houseModel = require("../models/houseModel");
 
 const getAllHouses = async (req, res) => {
     try {
+        console.log("Requisição para listar casas recebida.");
         const houses = await houseModel.getHouses();
         res.json(houses);
     } catch (error) {
+        console.error("Erro ao buscar casas:", error);
         res.status(500).json({ message: "Erro ao buscar casas." });
     }
 };
